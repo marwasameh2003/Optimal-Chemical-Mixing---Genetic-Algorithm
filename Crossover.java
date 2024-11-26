@@ -4,11 +4,11 @@ import java.util.List;
 // didn't evaluate just crossedover 
 // didn't handle if less than 3 genes
 public class Crossover {
-    List<Chromosome> BeforeCrossover = new ArrayList<Chromosome>();
-    List<Chromosome> AfterCrossover = new ArrayList<Chromosome>();
+    List<Chemical> BeforeCrossover = new ArrayList<Chemical>();
+    List<Chemical> AfterCrossover = new ArrayList<Chemical>();
     double pc = 0.6;
 
-    public Crossover(List<Chromosome> selectionResult) {
+    public Crossover(List<Chemical> selectionResult) {
         this.BeforeCrossover = selectionResult;
     }
 
@@ -19,7 +19,7 @@ public class Crossover {
             double probOfCross = Math.random();
             if (probOfCross < pc) {
                 // perform crossover
-                List<Chromosome> children = twoPointCrossover(BeforeCrossover.get(i), BeforeCrossover.get(i + 1));
+                List<Chemical> children = twoPointCrossover(BeforeCrossover.get(i), BeforeCrossover.get(i + 1));
                 AfterCrossover.addAll(children);
             } else // if we don't perform crossover we take the parents as they are with no
                    // modification
@@ -30,7 +30,7 @@ public class Crossover {
         }
     }
 
-    public List<Chromosome> twoPointCrossover(Chromosome parent1, Chromosome parent2) {
+    public List<Chemical> twoPointCrossover(Chemical parent1, Chemical parent2) {
         // since it is 2 point crossover so each chromosome is divided into 3 parts
 
         if (parent1.proportions.size() > 2 && parent2.proportions.size() > 2) // to be able to divide into three parts
@@ -68,17 +68,17 @@ public class Crossover {
 
             // combine the parts to construct the children
 
-            Chromosome child1 = new Chromosome();
+            Chemical child1 = new Chemical();
             child1.proportions.addAll(parent1part1);
             child1.proportions.addAll(parent2part2);
             child1.proportions.addAll(parent1part3);
 
-            Chromosome child2 = new Chromosome();
+            Chemical child2 = new Chemical();
             child2.proportions.addAll(parent2part1);
             child2.proportions.addAll(parent1part2);
             child2.proportions.addAll(parent2part3);
 
-            List<Chromosome> children = new ArrayList<>();
+            List<Chemical> children = new ArrayList<>();
             children.add(child1);
             children.add(child2);
             return children;
@@ -87,7 +87,7 @@ public class Crossover {
     }
 
     public void printChromesAfterCrossover() {
-        for (Chromosome c : AfterCrossover)
+        for (Chemical c : AfterCrossover)
             c.printChromo();
     }
 }

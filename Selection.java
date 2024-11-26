@@ -10,9 +10,9 @@ import java.util.Random;
 
 public class Selection
 {
-    List<Chromosome> BeforeSelection = new ArrayList<Chromosome>() ;
-    List<Chromosome> AfterSelection = new ArrayList<Chromosome>() ; 
-    public Selection(List<Chromosome> chromosomes)
+    List<Chemical> BeforeSelection = new ArrayList<Chemical>() ;
+    List<Chemical> AfterSelection = new ArrayList<Chemical>() ; 
+    public Selection(List<Chemical> chromosomes)
     {
         this.BeforeSelection = chromosomes;
     }
@@ -32,15 +32,15 @@ public class Selection
             int index1 = random.nextInt(BeforeSelection.size()-1);
             int index2 = random.nextInt(BeforeSelection.size()-1);
 
-            Chromosome c1 = BeforeSelection.get(index1);
-            Chromosome c2 = BeforeSelection.get(index2);
+            Chemical c1 = BeforeSelection.get(index1);
+            Chemical c2 = BeforeSelection.get(index2);
 
             if(c1.fitness > c2.fitness) AfterSelection.add(c1); else AfterSelection.add(c2);
         }
     }
     public void printSelectedChromes()
     {
-        for(Chromosome c : AfterSelection)
+        for(Chemical c : AfterSelection)
         c.printChromo();
     }
 }
