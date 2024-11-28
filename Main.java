@@ -13,22 +13,34 @@ public class Main {
         List<DataInput> testData = dExtractor.getData("input.txt");
         int noTstCases = dExtractor.numTestCases;
         
-        for (int i = 0; i < testData.size(); i++) {
+        while (noTstCases-- != 0 ) {
+            
+            for (int i = 0; i < testData.size(); i++) {
 
-            //for each data set
-            //1- create the random chromosomes
-            List<Chemical> chemicals = testData.get(i).chemicals;
-            List<Chromosome> chroms = RandomGenerator.getRandStartGen(4, chemicals);
-            //2- divide the population into best and notbest
-            Selection selection = new Selection();
-            selection.divideinitialPop(chroms);
-            List<Chromosome> best = selection.best;
-            List<Chromosome> notBest = selection.notbest;
-
-            //3- pass the not best to the selection
+                //for each data set
+                //1- create the random chromosomes
+                List<Chemical> chemicals = testData.get(i).chemicals;
+                List<Chromosome> chroms = RandomGenerator.getRandStartGen(3, chemicals);
 
 
+                for (Chromosome chromosome : chroms) {
+                    List<Chemical> t = chromosome.getGenes();
+
+                    for (Chemical te : t) {
+                        System.out.print(te.proportion + " ");
+                    }
+                    System.out.println();
+
+                   
+                    System.out.println("cost: "+ chromosome.getTotalCost());
+
+                    System.out.println();
+                }
+    
+    
+            }
         }
+        
 
 
 

@@ -27,19 +27,24 @@ public class RandomGenerator {
         List<Chromosome> chromosomes = new ArrayList<>();
         
         for (int i = 0; i < popSize; i++) {
+
             // create each chromosome
             Chromosome c = new Chromosome();
             int geneSz = chemcs.size();
 
             // genes list
-            List<Double> genes = new ArrayList<>();
+            List<Chemical> genes = new ArrayList<>();
+
 
             for (int j = 0; j < geneSz; j++) {
                 Double lBound = chemcs.get(j).lowerBound;
                 Double uBound = chemcs.get(j).upperBound;
                 // gene assigned to num between lower and upper bound
-                Double gene = Math.random() * (uBound - lBound) + lBound;
-                genes.add(gene);
+                Double prop = Math.random() * (uBound - lBound) + lBound;
+                Chemical cTemp = new Chemical(prop, uBound, lBound,chemcs.get(j).costPerUnit );
+
+                
+                genes.add(cTemp);
             }
             c.setGenes(genes);
             chromosomes.add(c); 
