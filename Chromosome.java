@@ -32,4 +32,13 @@ public class Chromosome {
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
+    public void printChrom()
+    {
+        System.out.print("[ ");
+        for(Chemical c : genes)
+        {
+            System.out.print(c.proportion + " , ");
+        }
+        System.out.println(" ] cost :"+getTotalCost());
+    }
 }

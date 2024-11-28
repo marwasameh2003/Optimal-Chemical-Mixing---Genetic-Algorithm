@@ -19,19 +19,18 @@ public class Main {
                 // for each data set
                 // 1- create the random chromosomes
                 List<Chemical> chemicals = testData.get(i).chemicals;
-                List<Chromosome> chroms = RandomGenerator.getRandStartGen(3, chemicals);
-
+                List<Chromosome> chroms = RandomGenerator.getRandStartGen(5, chemicals);
                 for (Chromosome chromosome : chroms) {
                     List<Chemical> t = chromosome.getGenes();
 
                     for (Chemical te : t) {
-                        System.out.print(te.proportion + " ");
+                       // System.out.print(te.proportion + " ");
                     }
-                    System.out.println();
+                   // System.out.println();
 
-                    System.out.println("cost: " + chromosome.getTotalCost());
+                   // System.out.println("cost: " + chromosome.getTotalCost());
 
-                    System.out.println();
+                    //System.out.println();
                 }
 
                 CorrectChromosome scaleing = new CorrectChromosome(testData.get(i).propLimit);
@@ -42,31 +41,61 @@ public class Main {
                     Chromosome nChrom = scaleing.scaleChromosome(chromosome);
                     list.add(nChrom);
                 }
-
+                System.out.println("chromosomes of initial popualtion");
                 for (Chromosome chromosome : list) {
-                   
-                    List<Chemical> t = chromosome.getGenes();
-
-                    for (Chemical te : t) {
-                        System.out.print(te.proportion + " ");
-                    }
-                    System.out.println();
-
-                    System.out.println("cost: " + chromosome.getTotalCost());
-
-                    System.out.println();
+                    chromosome.printChrom();
                 }
                 // divide the population into best and not best
                 Selection selection = new Selection();
                 selection.divideinitialPop(chroms);
                 List<Chromosome> best = selection.best;
                 List<Chromosome> notBest = selection.notbest;
-                
+                System.out.println("chromosomes of best");
+                for (Chromosome chromosome : best) {
+                    chromosome.printChrom();
+                }
+                System.out.println("chromosomes of notbest");
+                for (Chromosome chromosome : notBest) {
+                    chromosome.printChrom();
+                }
+                System.out.println("\nChromosomes before selection: ");
+                for(Chromosome c : notBest)
+                {
+                    c.printChrom();
+                    System.out.println("");
+                }
                 // pass the not best to the selection 
                 selection.tournamentSelection();
                 List<Chromosome> afterSelection = selection.afterSelection;
-
+                System.out.println("\n\nChromosomes after selection: ");
+                for(Chromosome c : afterSelection)
+                {
+                    c.printChrom();
+                    System.out.println("");
+                }
                 // now go to cross over stage
+                Crossover crossover = new Crossover(afterSelection);
+                System.out.println("\n\nChromosomes before crossover: ");
+                for(Chromosome c : crossover.beforeCrossover)
+                {
+                    c.printChrom();
+                    System.out.println("");
+                }
+                crossover.perfromCrossover();
+                // check if the results violates any constraint scale it 
+                List<Chromosome> afterScaling = new ArrayList<>();
+                for (Chromosome chromosome : crossover.afterCrossover) {
+                    Chromosome nChrom = scaleing.scaleChromosome(chromosome);
+                    afterScaling.add(nChrom);
+                }
+                crossover.afterCrossover = afterScaling;
+                System.out.println("Chromosomes after cross over: ");
+                for(Chromosome c : crossover.afterCrossover)
+                {
+                    c.printChrom();
+                    System.out.println("");
+                }
+                //now go to mutation stage  work on aftercrossover 
                 
 
             }
