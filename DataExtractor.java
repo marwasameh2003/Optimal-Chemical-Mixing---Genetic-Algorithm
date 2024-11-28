@@ -12,7 +12,7 @@ public class DataExtractor {
                 List<DataInput> data = new ArrayList<>();
         
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                    // Skip the first line (number of test cases)
+                    //  (number of test cases)
                     String noTsts  = br.readLine();
                     numTestCases = Integer.parseInt(noTsts);
                 
@@ -25,7 +25,7 @@ public class DataExtractor {
                 String[] parts = line.split(" ");
                 if (line != null) {
                     currentData.noChemicals = Integer.parseInt(parts[0]);
-                    currentData.totalSum = Double.parseDouble(parts[1]);
+                    currentData.propLimit = Double.parseDouble(parts[1]);
                 }
                
                 

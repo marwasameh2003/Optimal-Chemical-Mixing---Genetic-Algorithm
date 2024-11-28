@@ -33,6 +33,29 @@ public class Main {
 
                     System.out.println();
                 }
+
+                CorrectChromosome scaleing = new CorrectChromosome(testData.get(i).propLimit);
+
+                List<Chromosome> list = new ArrayList<>();
+
+                for (Chromosome chromosome : chroms) {
+                    Chromosome nChrom = scaleing.scaleChromosome(chromosome);
+                    list.add(nChrom);
+                }
+
+                for (Chromosome chromosome : list) {
+                   
+                    List<Chemical> t = chromosome.getGenes();
+
+                    for (Chemical te : t) {
+                        System.out.print(te.proportion + " ");
+                    }
+                    System.out.println();
+
+                    System.out.println("cost: " + chromosome.getTotalCost());
+
+                    System.out.println();
+                }
                 // divide the population into best and not best
                 Selection selection = new Selection();
                 selection.divideinitialPop(chroms);

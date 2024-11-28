@@ -4,7 +4,7 @@ import java.util.List;
 
 public class DataInput {
     int noChemicals;
-    double totalSum;
+    double propLimit;
     List<Chemical> chemicals = new ArrayList<>();
     public DataInput() {}
 
