@@ -4,28 +4,33 @@
 import java.util.List;
 
 public class Chemical {
-    List<Double> proportions ;
+    double proportion ;
     double upperBound;
     double lowerBound;
     double costPerUnit;
-    double fitness;
+    
 
-    public Chemical(List<Double> proportions, double uB, double lB, double cost, double fitness) {
-        this.proportions = proportions;
+    public Chemical(double proportion, double uB, double lB, double cost) {
+        this.proportion = proportion;
         this.upperBound = uB;
         this.lowerBound = lB;
         this.costPerUnit = cost;
-        this.fitness = fitness;
     }
     public Chemical()
     {
         this.upperBound = 0;
         this.lowerBound = 0;
         this.costPerUnit = 0;
-        this.fitness = 0;
     }
-    public void printChromo() {
-        System.out.println("Proportions: " + proportions + "Range: [" + upperBound + " , " + lowerBound + "] Cost: " + costPerUnit);
+    public void printChemical() {
+        System.out.println("Proportions: " + proportion + "Range: [" + upperBound + " , " + lowerBound + "] Cost: " + costPerUnit);
+    }
+
+    public double getProportion() {
+        return proportion;
+    }
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
     }
 
 }
