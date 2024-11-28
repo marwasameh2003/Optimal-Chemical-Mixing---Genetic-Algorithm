@@ -10,38 +10,59 @@ import java.util.Random;
 
 public class Selection
 {
-    List<Chemical> BeforeSelection = new ArrayList<Chemical>() ;
-    List<Chemical> AfterSelection = new ArrayList<Chemical>() ; 
-    public Selection(List<Chemical> chromosomes)
+    // first functionallity is dividing the initial population into best and notbest 
+    List<Chromosome> notbest = new ArrayList<>();
+    List<Chromosome> best = new ArrayList<>();
+    public void divideinitialPop(List<Chromosome> totalPop)
     {
-        this.BeforeSelection = chromosomes;
-    }
-
-    public void tournamentSelection()
-    {
-        // select two individuals randomly
-        // check the best of those two 
-        // add the best to the selected parents
-        // add this until you find K parents
-
-        //not sure of the sort whether required or not
-        Collections.sort(BeforeSelection, (c1, c2) -> Double.compare(c1.fitness, c2.fitness));
-        Random random = new Random();
-        while(BeforeSelection.size()> AfterSelection.size())
+        Collections.sort(totalPop, Comparator.comparingDouble(Chromosome::getTotalCost));
+        int bestSz = (int)(totalPop.size()*0.3);
+        for(int i = 0 ; i<bestSz;i++)
         {
-            int index1 = random.nextInt(BeforeSelection.size()-1);
-            int index2 = random.nextInt(BeforeSelection.size()-1);
-
-            Chemical c1 = BeforeSelection.get(index1);
-            Chemical c2 = BeforeSelection.get(index2);
-
-            if(c1.fitness > c2.fitness) AfterSelection.add(c1); else AfterSelection.add(c2);
+            best.add(totalPop.get(i));
+        }
+        for (int i = bestSz; i <totalPop.size() ; i++)
+        {
+            notbest.add(totalPop.get(i));    
         }
     }
-    public void printSelectedChromes()
-    {
-        for(Chemical c : AfterSelection)
-        c.printChromo();
-    }
+
 }
+
+// public class Selection
+// {
+//     List<Chemical> BeforeSelection = new ArrayList<Chemical>() ;
+//     List<Chemical> AfterSelection = new ArrayList<Chemical>() ; 
+//     public Selection(List<Chemical> chromosomes)
+//     {
+//         this.BeforeSelection = chromosomes;
+//     }
+
+//     public void tournamentSelection()
+//     {
+//         // select two individuals randomly
+//         // check the best of those two 
+//         // add the best to the selected parents
+//         // add this until you find K parents
+
+//         //not sure of the sort whether required or not
+//         Collections.sort(BeforeSelection, (c1, c2) -> Double.compare(c1.fitness, c2.fitness));
+//         Random random = new Random();
+//         while(BeforeSelection.size()> AfterSelection.size())
+//         {
+//             int index1 = random.nextInt(BeforeSelection.size()-1);
+//             int index2 = random.nextInt(BeforeSelection.size()-1);
+
+//             Chemical c1 = BeforeSelection.get(index1);
+//             Chemical c2 = BeforeSelection.get(index2);
+
+//             if(c1.fitness > c2.fitness) AfterSelection.add(c1); else AfterSelection.add(c2);
+//         }
+//     }
+//     public void printSelectedChromes()
+//     {
+//         for(Chemical c : AfterSelection)
+//         c.printChromo();
+//     }
+// }
 
