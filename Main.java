@@ -85,8 +85,37 @@ public class Main {
                     System.out.println("");
                 }
                 //now go to mutation stage  work on aftercrossover 
-                
+                NonUniformMutation nonUniformMutation = new NonUniformMutation(crossover.afterCrossover, 1, 1);
+                nonUniformMutation.performMutation();
+                List<Chromosome> feasibleAfterMutation = new ArrayList<>();
+                for (Chromosome chromosome : nonUniformMutation.afterMutation) {
+                    Chromosome nChrom = scaleing.scaleChromosome(chromosome);
+                    feasibleAfterMutation.add(nChrom);
+                }
+                nonUniformMutation.afterMutation = feasibleAfterMutation;
+                System.out.println("Chromosomes after mutation: ");
+                for(Chromosome c : nonUniformMutation.afterMutation)
+                {
+                    c.printChrom();
+                    System.out.println("");
+                }
 
+                ElitismReplacement replacement = new ElitismReplacement(nonUniformMutation.afterMutation,best,notBest);
+                List<Chromosome> newGen =  replacement.ElitismResault();
+                List<Chromosome> feasibleAfterReplacement = new ArrayList<>();
+                for (Chromosome chromosome : newGen) {
+                    Chromosome nChrom = scaleing.scaleChromosome(chromosome);
+                    feasibleAfterReplacement.add(nChrom);
+                }
+                chroms = feasibleAfterReplacement; // replace the old generation
+                System.out.println("Chromosomes after Replacement: ");
+                int x = 0;
+                for(Chromosome c : chroms)
+                {
+                    System.out.print(x++ + " ");
+                    c.printChrom();
+                    System.out.println("");
+                }
             }
         }
     }
