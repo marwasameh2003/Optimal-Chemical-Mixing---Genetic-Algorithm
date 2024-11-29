@@ -22,6 +22,7 @@ public class NonUniformMutation {
             for (int j = 0; j < chromosomes.get(i).genes.size(); j++) {
                 double ri = random.nextDouble();
                 double y;
+                
                 if(ri <= 0.5){
                     y = chromosomes.get(i).genes.get(j).proportion - chromosomes.get(i).genes.get(j).lowerBound;
                 }else{

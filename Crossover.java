@@ -17,7 +17,7 @@ public class Crossover
     public void perfromCrossover()
     {
         // check whether the #chroms is odd or even
-        if(beforeCrossover.size()%2 !=0) 
+        if(beforeCrossover.size()% 2 !=0) 
         {
             //System.out.println("\nadded chrom to make it even");
             beforeCrossover.add(beforeCrossover.get(0));
@@ -55,7 +55,7 @@ public class Crossover
         int p2Sz = p2.getGenes().size();
         //System.out.println(p1Sz + " sizes " + p2Sz);
         List<Chromosome> children = new ArrayList<>();
-        if(p1Sz>=3 && p2Sz>=3)
+        if(p1Sz >= 3 && p2Sz >= 3)
         {
             // now divide each parent into 3 parts
             // parent1 division
@@ -75,15 +75,6 @@ public class Crossover
             {
                 p1part3.add(p1.getGenes().get(i));    
             }
-            // System.out.println("divided parent 1 successfylly");
-            // System.out.println("p1part1");
-            // for(Chemical ci : p1part1)System.out.println(ci.proportion);
-
-            // System.out.println("p1part2");
-            // for(Chemical ci : p1part2)System.out.println(ci.proportion);
-
-            // System.out.println("p1part3");
-            // for(Chemical ci : p1part3)System.out.println(ci.proportion);
             //parent2 division
             int p2partsz = p2Sz/3;
             List<Chemical> p2part1 = new ArrayList<>();
@@ -101,28 +92,16 @@ public class Crossover
             {
                 p2part3.add(p2.getGenes().get(i));    
             }
-            // System.out.println("divided parent 2 successfylly");
-            // System.out.println("p2part1");
-            // for(Chemical ci : p2part1)System.out.println(ci.proportion);
-
-            // System.out.println("p2part2");
-            // for(Chemical ci : p2part2)System.out.println(ci.proportion);
-
-            // System.out.println("p2part3");
-            // for(Chemical ci : p2part3)System.out.println(ci.proportion);
             //children construction
             List<Chemical> child1 = new ArrayList<Chemical>();
             child1.addAll(p1part1);
             child1.addAll(p2part2);
             child1.addAll(p1part3);
-            //System.out.println("constructed child 1 successfylly");
 
             List<Chemical> child2 = new ArrayList<Chemical>();
             child2.addAll(p2part1);
             child2.addAll(p1part2);
             child2.addAll(p2part3);
-            //System.out.println("constructed child 2 successfylly");
-
             // now encapsulate these chemicals into two children
             Chromosome c1 = new Chromosome();
             c1.setGenes(child1);
@@ -135,15 +114,7 @@ public class Crossover
             c2.getTotalProp();
             children.add(c1);
             children.add(c2);
-
-            // System.out.println("parent were ");
-            // p1.printChrom();
-            // p2.printChrom();
-            // System.out.println("children are");
-            // c1.printChrom();
-            // c2.printChrom();
         }
-        // else we will perform 1 point cross over
         return children;
     }
 
