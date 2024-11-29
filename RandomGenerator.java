@@ -40,7 +40,8 @@ public class RandomGenerator {
                 Double lBound = chemcs.get(j).lowerBound;
                 Double uBound = chemcs.get(j).upperBound;
                 // gene assigned to num between lower and upper bound
-                Double prop = Math.random() * (uBound - lBound) + lBound;
+                Double prop =  (Math.random() * (uBound - lBound) + lBound);
+                prop = Math.ceil((double)prop * 100) / 100.0;
                 Chemical cTemp = new Chemical(prop, uBound, lBound,chemcs.get(j).costPerUnit );
 
                 

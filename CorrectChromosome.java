@@ -39,9 +39,10 @@ public class CorrectChromosome {
                 double rndAdd =  Math.random() * upperVal;
 
                 gene.proportion += rndAdd;
+                gene.proportion = Math.ceil(gene.proportion * 100) / 100.0;
                 curGenes.set(rndIdx, gene);
                 chrom.setGenes(curGenes);
-                
+
             }else if(chrom.getTotalProp() > propLmt){
 
                 int rndIdx = (int) (Math.random() * n);
@@ -51,6 +52,9 @@ public class CorrectChromosome {
                 double rndAdd =  Math.random() * upperVal; // choose rand number between 0 and min of the upper two
 
                 gene.proportion -= rndAdd;
+                // ceil the proprtion 
+                gene.proportion = Math.ceil(gene.proportion * 100) / 100.0;
+
                 curGenes.set(rndIdx, gene);
                 chrom.setGenes(curGenes);
             }
@@ -60,22 +64,5 @@ public class CorrectChromosome {
         return chrom;
     }
 
-    private Double scaleGene(Chemical gene, double total){
-
-        double newProp = 0.0;
-        if( gene.proportion < gene.lowerBound){
-
-            newProp = gene.lowerBound;
-
-        }else if( gene.proportion > gene.upperBound){
-
-            newProp = gene.upperBound;
-
-        }else{
-            newProp = (gene.proportion/total) * 100;
-        }
-        
-
-        return newProp;
-    }
+    
 }

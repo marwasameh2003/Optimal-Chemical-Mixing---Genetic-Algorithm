@@ -20,29 +20,18 @@ public class Main {
                 // 1- create the random chromosomes
                 List<Chemical> chemicals = testData.get(i).chemicals;
                 List<Chromosome> chroms = RandomGenerator.getRandStartGen(5, chemicals);
-                for (Chromosome chromosome : chroms) {
-                    List<Chemical> t = chromosome.getGenes();
-
-                    for (Chemical te : t) {
-                       // System.out.print(te.proportion + " ");
-                    }
-                   // System.out.println();
-
-                   // System.out.println("cost: " + chromosome.getTotalCost());
-
-                    //System.out.println();
-                }
-
+                
                 CorrectChromosome scaleing = new CorrectChromosome(testData.get(i).propLimit);
 
                 List<Chromosome> list = new ArrayList<>();
 
                 for (Chromosome chromosome : chroms) {
-                    Chromosome nChrom = scaleing.scaleChromosome(chromosome);
-                    list.add(nChrom);
+                    chromosome = scaleing.scaleChromosome(chromosome);
+                    
                 }
+                
                 System.out.println("chromosomes of initial popualtion");
-                for (Chromosome chromosome : list) {
+                for (Chromosome chromosome : chroms) {
                     chromosome.printChrom();
                 }
                 // divide the population into best and not best
